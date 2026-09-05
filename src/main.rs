@@ -1,3 +1,5 @@
+mod four_transports;
+mod web_api_plane;
 use std::{env, sync::Arc};
 
 use axum::{
@@ -38,6 +40,7 @@ async fn main() -> anyhow::Result<()> {
     let app = Router::new()
         .route("/", get(index))
         .route("/healthz", get(health))
+            .route("/v1/data-plane/capabilities", axum::routing::get(|| async { axum::Json(crate::web_api_plane::capabilities()) }))
         .route("/partials/events", get(items_partial).post(create_item))
         .route("/ws", get(ws_upgrade))
         .layer(TraceLayer::new_for_http())
