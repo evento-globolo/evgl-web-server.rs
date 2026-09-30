@@ -2,6 +2,9 @@ mod flags;
 mod four_transports;
 mod web_api_plane;
 
+#[path = "../.vendor/.zed/oresoftware/ores-sw/rust/axum08.rs"]
+mod ores_sw_axum;
+
 use std::sync::Arc;
 
 use axum::{
@@ -72,6 +75,7 @@ async fn main() -> anyhow::Result<()> {
         .route("/ws", get(ws_upgrade))
         .layer(TraceLayer::new_for_http())
         .with_state(state);
+    let app = ores_sw_axum::install(app);
     let host = flags::var("HOST").unwrap_or_else(|_| "0.0.0.0".into());
     let port = flags::var("PORT").unwrap_or_else(|_| "8081".into());
     let listener = tokio::net::TcpListener::bind(format!("{host}:{port}")).await?;

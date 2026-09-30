@@ -22,6 +22,7 @@ exclude = [".env", ".env.*", "node_modules/**", ".vendor/.zed/**", "target/**", 
 "evento-globolo/evgl-libs" = "^0.1.0"
 "evento-globolo/evgl-sync" = "^0.1.0"
 "shared-auth/shared-auth-clients" = "^0.1.0"
+"oresoftware/ores-sw" = "^0.1.0"
 
 [install]
 dir = ".vendor/.zed"
